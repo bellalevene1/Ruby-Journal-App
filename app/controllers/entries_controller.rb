@@ -14,6 +14,11 @@ class EntriesController < ApplicationController
         else
             render :new
     end
+    
+    def destroy
+        Entry.find(params[:id]).destroy
+        redirect_to root_url
+    end
 end
 
 private
