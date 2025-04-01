@@ -1,2 +1,5 @@
 class Entry < ApplicationRecord
-end
+    has_one_attached :image
+    has_one_attached :audio
+  end
+  

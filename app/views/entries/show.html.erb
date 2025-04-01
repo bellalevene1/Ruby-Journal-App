@@ -1,0 +1,29 @@
+<h1 class="mb-4"><%= @entry.name %></h1>
+
+<% if @entry.description.present? %>
+  <p><strong>Description:</strong> <%= @entry.description %></p>
+<% end %>
+
+<% if @entry.link.present? %>
+  <p><strong>Location:</strong> <%= @entry.link %></p>
+<% end %>
+
+<% if @entry.image.attached? %>
+  <div class="mb-3">
+    <strong>Photo:</strong><br>
+    <%= image_tag @entry.image, class: "img-fluid rounded" %>
+  </div>
+<% end %>
+
+<% if @entry.audio.attached? %>
+  <div class="mb-3">
+    <strong>Voice Memo:</strong><br>
+    <audio controls>
+      <source src="<%= url_for(@entry.audio) %>" type="<%= @entry.audio.content_type %>">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+<% end %>
+
+<%= link_to "Edit", edit_entry_path(@entry), class: "btn btn-primary me-2" %>
+<%= link_to "Back", root_path, class: "btn btn-secondary" %>
