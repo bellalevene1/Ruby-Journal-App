@@ -1,16 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<h1 class="mb-4 text-center">Dream Destinations</h1>
 
-<% content_for :title, "Dream destinations" %>
-
-<h1>Dream destinations</h1>
-
-<div id="dream_destinations">
-  <% @dream_destinations.each do |dream_destination| %>
-    <%= render dream_destination %>
-    <p>
-      <%= link_to "Show this dream destination", dream_destination %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between mb-4">
+  <%= link_to "Add New Destination", new_dream_destination_path, class: "btn btn-primary" %>
+  <%= link_to "Back to Journal", root_path, class: "btn btn-outline-dark" %>
 </div>
 
-<%= link_to "New dream destination", new_dream_destination_path %>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <% @dream_destinations.each do |destination| %>
+    <div class="col">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title"><%= destination.location %></h5>
+          <p><strong>Reason:</strong> <%= destination.reason %></p>
+          <p><strong>Goal:</strong> <%= destination.goal %></p>
+
+          <div class="d-flex gap-2 mt-3">
+            <%= link_to "View", dream_destination_path(destination), class: "btn btn-outline-primary btn-sm" %>
+            <%= link_to "Edit", edit_dream_destination_path(destination), class: "btn btn-outline-secondary btn-sm" %>
+            <%= button_to "Delete", destination, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
