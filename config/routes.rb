@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  get "map/index"
   resources :dream_destinations
   root 'entries#index'
   resources :entries  # Enables ALL standard routes (including show, edit, update)
+  get "map", to: "map#index"
+
 
   # Optional: Keep this stuff if you're using PWA features
   get "up" => "rails/health#show", as: :rails_health_check

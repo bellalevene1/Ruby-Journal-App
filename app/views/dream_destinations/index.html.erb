@@ -10,7 +10,33 @@
     <div class="col">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <h5 class="card-title"><%= destination.location %></h5>
+          <div class="d-flex justify-content-between align-items-start mb-2">
+            <h5 class="card-title mb-0"><%= destination.location %></h5>
+
+            <% if destination.status.present? %>
+              <div class="text-end">
+                <div class="mb-1">
+                  <%=
+                    case destination.status
+                    when "Planned" then "✈️ Planned"
+                    when "Booked" then "📍 Booked"
+                    when "Completed" then "✅ Completed"
+                    else "❓ Unknown"
+                    end
+                  %>
+                </div>
+                <span class="badge 
+                  <%= case destination.status
+                      when "Planned" then "bg-warning text-dark"
+                      when "Booked" then "bg-info text-dark"
+                      when "Completed" then "bg-success"
+                      else "bg-secondary" end %>">
+                  <%= destination.status %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+
           <p><strong>Reason:</strong> <%= destination.reason %></p>
           <p><strong>Goal:</strong> <%= destination.goal %></p>
 
