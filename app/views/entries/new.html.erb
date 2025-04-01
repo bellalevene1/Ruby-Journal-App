@@ -1,20 +1,37 @@
-<h1>New Entry</h1>
+<h1 class="mb-4">Journal Entries</h1>
 
-<%= form_with(model: @entry) do |form| %>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <%= form_with(model: @entry, local: true, html: { multipart: true }) do |form| %>
+      <div class="mb-3">
+        <%= form.label :name, class: "form-label" %>
+        <%= form.text_field :name, class: "form-control", placeholder: "Entry name..." %>
+      </div>
 
- <div>
-   <%= form.label :name %>
-   <%= form.text_field :name %>
- </div>
+      <div class="mb-3">
+        <%= form.label :link, "Location", class: "form-label" %>
+        <%= form.text_field :link, class: "form-control", placeholder: "Enter location..." %>
+      </div>
 
- <div>
-   <%= form.submit %>
- </div>
+      <div class="mb-3">
+        <%= form.label :description, class: "form-label" %>
+        <%= form.text_area :description, rows: 3, class: "form-control", placeholder: "Write a little about this entry..." %>
+      </div>
 
-<% end %>
+      <div class="mb-3">
+        <%= form.label :image, "Photo", class: "form-label" %>
+        <%= form.file_field :image, class: "form-control" %>
+      </div>
 
-<br>
+      <div class="mb-3">
+        <%= form.label :audio, "Voice Memo", class: "form-label" %>
+        <%= form.file_field :audio, class: "form-control", accept: "audio/*" %>
+      </div>
 
-<div>
- <%= link_to "Back to home", root_path %>
+      <%= form.submit "Create Entry", class: "btn btn-primary" %>
+    <% end %>
+
+    <%= link_to "Back to home", root_path, class: "btn btn-link mt-3" %>
+  </div>
 </div>
+

@@ -1,10 +1,10 @@
-<div>
- <div>
-   <%= link_to "Ruby journal app", root_path %>
-
-   <div class="navbar-link">
-     <%= link_to "New Entry", new_entry_path %>
-   </div>
-
- </div>
-</div>
+<nav class="navbar navbar-light bg-light shadow-sm">
+  <div class="container d-flex justify-content-between align-items-center w-100">
+    <div class="flex-grow-1 text-center">
+      <span class="navbar-brand h4 mb-0">Welcome to Travel Journal App</span>
+    </div>
+    <div>
+      <%= link_to "New Entry", new_entry_path, class: "btn btn-outline-primary rounded-pill" %>
+    </div>
+  </div>
+</nav>
