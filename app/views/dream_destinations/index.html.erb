@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Dream destinations" %>
+
+<h1>Dream destinations</h1>
+
+<div id="dream_destinations">
+  <% @dream_destinations.each do |dream_destination| %>
+    <%= render dream_destination %>
+    <p>
+      <%= link_to "Show this dream destination", dream_destination %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New dream destination", new_dream_destination_path %>

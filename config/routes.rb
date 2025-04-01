@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :dream_destinations
   root 'entries#index'
   resources :entries  # Enables ALL standard routes (including show, edit, update)
 

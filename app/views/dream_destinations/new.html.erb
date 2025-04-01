@@ -1,0 +1,11 @@
+<% content_for :title, "New dream destination" %>
+
+<h1>New dream destination</h1>
+
+<%= render "form", dream_destination: @dream_destination %>
+
+<br>
+
+<div>
+  <%= link_to "Back to dream destinations", dream_destinations_path %>
+</div>

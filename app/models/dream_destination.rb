@@ -1,0 +1,2 @@
+class DreamDestination < ApplicationRecord
+end
