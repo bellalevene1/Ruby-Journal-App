@@ -17,16 +17,6 @@
       </div>
     <% end %>
 
-    <% if @entry.audio.attached? %>
-      <div class="mb-3">
-        <strong>Voice Memo:</strong><br>
-        <audio controls class="w-100 mt-2">
-          <source src="<%= url_for(@entry.audio) %>" type="<%= @entry.audio.content_type %>">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-    <% end %>
-
     <div class="d-flex gap-2 mt-4">
       <%= link_to "Edit", edit_entry_path(@entry), class: "btn btn-outline-primary" %>
       <%= link_to "Back", root_path, class: "btn btn-outline-secondary" %>

@@ -65,6 +65,6 @@ class DreamDestinationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dream_destination_params
-      params.require(:dream_destination).permit(:location, :reason, :goal)
+      params.require(:dream_destination).permit(:location, :reason, :goal, :status)
     end
 end
