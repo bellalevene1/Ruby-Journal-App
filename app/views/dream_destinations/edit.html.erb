@@ -1,0 +1,12 @@
+<% content_for :title, "Editing dream destination" %>
+
+<h1>Editing dream destination</h1>
+
+<%= render "form", dream_destination: @dream_destination %>
+
+<br>
+
+<div>
+  <%= link_to "Show this dream destination", @dream_destination %> |
+  <%= link_to "Back to dream destinations", dream_destinations_path %>
+</div>

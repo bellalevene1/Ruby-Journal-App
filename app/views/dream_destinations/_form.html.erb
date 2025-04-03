@@ -1,0 +1,38 @@
+<%= form_with(model: dream_destination, local: true) do |form| %>
+  <% if dream_destination.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(dream_destination.errors.count, "error") %> prohibited this dream destination from being saved:</h4>
+      <ul>
+        <% dream_destination.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :location, class: "form-label" %>
+    <%= form.text_field :location, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :reason, class: "form-label" %>
+    <%= form.text_area :reason, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :goal, class: "form-label" %>
+    <%= form.text_field :goal, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :status, class: "form-label" %>
+    <%= form.select :status, ["Planned", "Booked", "Completed"], {}, class: "form-select" %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.submit class: "btn btn-success" %>
+    <%= link_to "Cancel", dream_destinations_path, class: "btn btn-secondary ms-2" %>
+  </div>
+<% end %>
+

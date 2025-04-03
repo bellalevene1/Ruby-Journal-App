@@ -1,0 +1,2 @@
+module DreamDestinationsHelper
+end

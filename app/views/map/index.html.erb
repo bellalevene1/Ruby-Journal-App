@@ -1,0 +1,85 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var map = L.map('map').setView([20, 0], 2); // World view
+
+    // Light tile layer from Carto
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap & CartoDB contributors'
+    }).addTo(map);
+
+    // Helper function to place markers
+    function placeMarker(query, label, color) {
+      fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data && data[0]) {
+            const marker = L.marker([data[0].lat, data[0].lon]).addTo(map);
+            marker.bindPopup(`<strong style="color:${color}">${label}</strong><br>${query}`);
+          }
+        })
+        .catch(err => console.error('Geocoding error:', err));
+    }
+
+    // Add markers for journal entries
+    <% @entries.each do |entry| %>
+      <% if entry.link.present? %>
+        placeMarker("<%= entry.link %>", "Visited: <%= j entry.name %>", "blue");
+      <% end %>
+    <% end %>
+
+    // Add markers for dream destinations
+    <% @dream_destinations.each do |dest| %>
+      <% if dest.location.present? %>
+        placeMarker("<%= dest.location %>", "Dream: <%= j dest.location %>", "green");
+      <% end %>
+    <% end %>
+  });
+</script>
+
+<h1 class="mb-4 text-center">Interactive Map</h1>
+
+<div id="map" style="height: 600px;" class="rounded shadow-sm"></div>
+
+<%= javascript_include_tag "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" %>
+<%= stylesheet_link_tag "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const map = L.map('map').setView([20, 0], 2); // World view
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap & CartoDB contributors',
+      maxZoom: 18
+    }).addTo(map);
+
+    const geocodeAndAddMarker = (query, label, color) => {
+      fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data && data[0]) {
+            const lat = parseFloat(data[0].lat);
+            const lon = parseFloat(data[0].lon);
+            const marker = L.marker([lat, lon], {
+              icon: L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div style="background:${color};padding:4px 8px;border-radius:4px;color:white;font-size:12px;">${label}</div>`
+              })
+            }).addTo(map);
+          }
+        });
+    }
+
+    <% @entries.each do |entry| %>
+      <% if entry.link.present? %>
+        geocodeAndAddMarker("<%= j entry.link %>", "Visited: <%= j entry.name %>", "#007bff");
+      <% end %>
+    <% end %>
+
+    <% @dream_destinations.each do |destination| %>
+      <% if destination.location.present? %>
+        geocodeAndAddMarker("<%= j destination.location %>", "Dream: <%= j destination.location %>", "#28a745");
+      <% end %>
+    <% end %>
+  });
+</script>
