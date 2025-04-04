@@ -1,12 +1,12 @@
 class DreamDestinationsController < ApplicationController
   before_action :set_dream_destination, only: %i[ show edit update destroy ]
 
-  # GET /dream_destinations or /dream_destinations.json
+  # GET /dream_destinations 
   def index
     @dream_destinations = DreamDestination.all
   end
 
-  # GET /dream_destinations/1 or /dream_destinations/1.json
+  # GET /dream_destinations/1
   def show
   end
 
@@ -19,7 +19,7 @@ class DreamDestinationsController < ApplicationController
   def edit
   end
 
-  # POST /dream_destinations or /dream_destinations.json
+  # POST /dream_destinations
   def create
     @dream_destination = DreamDestination.new(dream_destination_params)
 
@@ -34,7 +34,6 @@ class DreamDestinationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /dream_destinations/1 or /dream_destinations/1.json
   def update
     respond_to do |format|
       if @dream_destination.update(dream_destination_params)
@@ -57,12 +56,10 @@ class DreamDestinationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_dream_destination
       @dream_destination = DreamDestination.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def dream_destination_params
       params.require(:dream_destination).permit(:location, :reason, :goal, :status)
     end
