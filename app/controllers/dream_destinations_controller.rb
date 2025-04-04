@@ -47,7 +47,6 @@ class DreamDestinationsController < ApplicationController
     end
   end
 
-  # DELETE /dream_destinations/1 or /dream_destinations/1.json
   def destroy
     @dream_destination.destroy!
 
