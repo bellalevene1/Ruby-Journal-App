@@ -12,7 +12,7 @@ class EntriesController < ApplicationController
       if @entry.save
         redirect_to root_url, notice: "Entry created successfully!"
       else
-        render :new
+        render :new, status: :unprocessable_entity
       end
     end
   
